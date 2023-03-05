@@ -1,0 +1,57 @@
+CREATE TABLE Branches (
+	Branch_Number int NOT NULL,
+	Branch_Address varchar(50),
+	Branch_City varchar(30),
+	Branch_Province varchar(30),
+	Branch_PC varchar(6),
+	PRIMARY KEY (Branch_Number)
+)
+
+CREATE TABLE Employee (
+	Employee_Number int NOT NULL,
+	FirstName varchar(30),
+	LastName varchar(30),
+	EmpAddress varchar(30),
+	City varchar(30),
+	Province varchar(30),
+	Branch_Number int NOT NULL,
+	PRIMARY KEY (Employee_Number),
+	FOREIGN KEY (Branch_Number) REFERENCES Branches(Branch_Number)
+)
+
+CREATE TABLE Customer (
+	Customer_Number int NOT NULL,
+	FirstName varchar(30),
+	LastName varchar(30),
+	EmpAddress varchar(30),
+	City varchar(30),
+	Province varchar(30),
+	Branch_Number int NOT NULL,
+	PRIMARY KEY (Customer_Number),
+	FOREIGN KEY (Branch_Number) REFERENCES Branches(Branch_Number)
+)
+
+CREATE TABLE Account (
+	Account_Number int NOT NULL,
+	Account_Type varchar(50),
+	Date_opened DATE,
+	Opened_By int NOT NULL,
+	Branch int NOT NULL,
+	Customer_Number int NOT NULL,
+	PRIMARY KEY (Account_Number),
+	FOREIGN KEY (Branch) REFERENCES Branches (Branch_Number),
+	FOREIGN KEY (Opened_By) REFERENCES Employee (Employee_Number),
+	FOREIGN KEY (Customer_Number) REFERENCES Customer (Customer_Number)
+)
+
+
+CREATE TABLE Transactions (
+	Transaction_No int NOT NULL,
+	Transaction_Date DATE,
+	Transaction_Amount decimal(8,1),
+	Account_Number INT NOT NULL,
+	Customer_Number INT NOT NULL,
+	PRIMARY KEY (Transaction_No),
+	FOREIGN KEY (Account_Number) REFERENCES Account (Account_Number),
+	FOREIGN KEY (Customer_Number) REFERENCES Customer (Customer_Number)
+)
