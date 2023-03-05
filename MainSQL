@@ -23,7 +23,7 @@ CREATE TABLE Customer (
 	Customer_Number int NOT NULL,
 	FirstName varchar(30),
 	LastName varchar(30),
-	EmpAddress varchar(30),
+	Address varchar(30),
 	City varchar(30),
 	Province varchar(30),
 	Branch_Number int NOT NULL,
